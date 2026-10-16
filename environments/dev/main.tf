@@ -19,3 +19,10 @@ module "security_groups" {
   name   = "dev"
   vpc_id = module.vpc.vpc_id
 }
+
+module "ec2" {
+  source    = "../../modules/ec2"
+  name      = "dev"
+  subnet_id = module.vpc.private_subnet_ids[0]
+  sg_id     = module.security_groups.app_sg_id
+}
